@@ -311,9 +311,6 @@ nav .brand-logo, .card-title {
 .default_color {
 	background-color: #fff !important; 
 }
-.footer_color {
-	background-color: #999 !important; 
-}
 .bgcolor2{
 	background-color: #eee !important; 
 }
@@ -371,4 +368,8 @@ ul li {
 ul li::before {
     margin-left: -15px;
     content: "–";
+}
+
+footer{
+	margin-bottom:30px;
 }
