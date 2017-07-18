@@ -337,18 +337,15 @@ nav .brand-logo, .card-title {
 /*.small09{*/
 /*	font-size: 0.9em;*/
 /*}*/
-/*.card-content a {
-     color: inherit; 
-}*/
+.biggertext{
+	font-size: 1.2em;
+}
 .monospace-font {
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 a:hover {
 	opacity:0.8;
 	/*text-decoration: underline !important;*/
-}
-#biglogo{
-	/*max-height: calc( 100vh - 350px);*/
 }
 
 .nav-wrapper h1{ padding:0; margin: 0; }
@@ -357,15 +354,21 @@ a:hover {
 .justify{ text-align: justify; }
 
 
+/*lessen gaps between cards*/
 @media only screen and (min-width: 993px) {
 	.card {
 		min-height: 200px ;
 	}
 }
-	div.card-content > div.row{
-		margin-bottom:0;
-	}
-	.biggertext{
-		font-size: 1.2em;
-		/*font-weight: 100;*/
-	}
+div.card-content > div.row{
+	margin-bottom:0;
+}
+
+/* restore ndashes in lists */
+ul li {
+    margin-left: 15px;
+}
+ul li::before {
+    margin-left: -15px;
+    content: "–";
+}
