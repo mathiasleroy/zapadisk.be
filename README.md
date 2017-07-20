@@ -25,13 +25,21 @@ in the terminal.
 It will execute the file `makefile` and create everything that should be in `build`.
 
 
-DEPLOY WEBSITE
---------------
 
-    cd zapadisk/build
-    surge
+HOW TO MODIFY
+==============
 
-(need the right surge account)
+1  get most recent version:
+
+	git pull
+2  make changes in index.html (not build/index.html)
+3 deploy	
+
+	cd zapadisk; make; cd build; surge;
+4 share changes: 
+
+	git add .; git commit -m "whatyouchanged"; git push;
+
 
 
     
