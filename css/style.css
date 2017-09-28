@@ -352,11 +352,6 @@ a:hover {
 
 
 /*lessen gaps between cards*/
-@media only screen and (min-width: 993px) {
-	.card {
-		min-height: 200px ;
-	}
-}
 div.card-content > div.row{
 	margin-bottom:0;
 }
