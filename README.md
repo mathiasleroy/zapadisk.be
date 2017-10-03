@@ -38,7 +38,7 @@ HOW TO MODIFY
 	cd zapadisk; make; cd build; surge;
 4 share changes: 
 
-	git add .; git commit -m "whatyouchanged"; git push;
+	cd ..; git add .; git commit -m "whatyouchanged"; git push;
 
 
 

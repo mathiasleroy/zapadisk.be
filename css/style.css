@@ -304,6 +304,13 @@ footer.page-footer {
 nav ul a, nav a, h2, h3, h4, h5 {
 	color: #666;
 }
+h5{
+	font-size: 1.4rem;
+	font-weight: 300;
+}
+h6{
+	font-weight: 400;
+}
 nav .brand-logo, .card-title {
 	color: #393939 ;
 }
