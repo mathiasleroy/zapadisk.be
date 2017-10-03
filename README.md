@@ -36,6 +36,7 @@ HOW TO MODIFY
 3 deploy	
 
 	cd zapadisk; make; cd build; surge;
+	
 4 share changes: 
 
 	cd ..; git add .; git commit -m "whatyouchanged"; git push;
