@@ -35,11 +35,11 @@ HOW TO MODIFY
 2  make changes in index.html (not build/index.html)
 3 deploy	
 
-	cd zapadisk; make; cd build; surge;
+	cd zapadisk; make; cd build; surge; cd ..;
 	
 4 share changes: 
 
-	cd ..; git add .; git commit -m "whatyouchanged"; git push;
+	git add .; git commit -m "whatyouchanged"; git push;
 
 
 
