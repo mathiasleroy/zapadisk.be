@@ -344,7 +344,7 @@ nav .brand-logo, .card-title {
 .biggertext{
 	font-size: 1.2em;
 }
-.monospace-font {
+.monospace-font, a {
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 a:hover {
