@@ -68,18 +68,43 @@
 	color: black;
 	/*font-size: 2.1rem;*/
     font-weight: 400;
-    font-size:74px !important;
+    font-size:88px !important;
     margin-top:20px;
 }
 .brand-logo small{
 	/*font-family: "Roboto", sans-serif;*/
+	/*font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;*/
+
 	letter-spacing: normal;
 	font-size: 0.5em;
-	/*font-weight: 100;*/
+	font-weight: 100;
 	/*text-transform: uppercase;*/
 	text-transform: lowercase;
 	font-variant: small-caps;
-	padding-left: 15px;
+	/*padding-left: 15px;*/
+	padding-top: -20px;
+	position: relative;
+	top:-30px;
+}
+
+@media only screen and (max-width: 992px) {
+	.brand-logo{
+	    font-size:76px !important;
+	}
+	.brand-logo small{
+		font-size: 0.4em;
+		top:-35px;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.brand-logo{
+	    font-size:64px !important;
+	}
+	.brand-logo small{
+		font-size: 0.4em;
+		top:-45px;
+		/*padding-bottom: 40px;*/
+	}
 }
 
 .text_h2 {font-weight: 100;margin-bottom: 4%; line-height: 4.5rem;}
@@ -248,6 +273,8 @@ nav ul a {
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
+/*@media only screen and (max-width: 992px) {*/
+/*@media only screen and (max-width: 600px) {*/
 @media only screen and (max-width: 480px) {
 	.text_h {
 		padding: 4% 0;
