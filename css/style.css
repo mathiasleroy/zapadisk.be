@@ -8,10 +8,12 @@
 
 @font-face {
     font-family: 'SoulMission';
-    src:url('../fonts/SoulMission.ttf.woff') format('woff'),
-        url('../fonts/SoulMission.ttf.svg#SoulMission') format('svg'),
-        url('../fonts/SoulMission.ttf.eot'),
-        url('../fonts/SoulMission.ttf.eot?#iefix') format('embedded-opentype'); 
+    src:	url('../fonts/SoulMission.woff2') format('woff2')
+    ,		url('../fonts/SoulMission.ttf.woff') format('woff')
+	/*,		url('../fonts/SoulMission.ttf.svg#SoulMission') format('svg'),
+   url('../fonts/SoulMission.ttf.eot'),
+   url('../fonts/SoulMission.ttf.eot?#iefix') format('embedded-opentype')*/
+        ; 
     font-weight: normal;
     font-style: normal;
 }
@@ -70,9 +72,14 @@
     margin-top:20px;
 }
 .brand-logo small{
-	font-family: "Roboto", sans-serif;
+	/*font-family: "Roboto", sans-serif;*/
 	letter-spacing: normal;
-	font-size: 0.4em;
+	font-size: 0.5em;
+	/*font-weight: 100;*/
+	/*text-transform: uppercase;*/
+	text-transform: lowercase;
+	font-variant: small-caps;
+	padding-left: 15px;
 }
 
 .text_h2 {font-weight: 100;margin-bottom: 4%; line-height: 4.5rem;}
