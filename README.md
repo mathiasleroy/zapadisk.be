@@ -1,45 +1,39 @@
-Zapadisk
+Zapadisk.be
 =================
 
-
 ultimate team website [zapadisk.be](http://zapadisk.be/)
-
 
 
 FILES
 --------------
 
-The root of this project contains the source files.
-The published files are in the folder `build`.
-All the files there are generated. (you can delete them and regenerate them)
+The root of this project contains the source files.  
+The actual website is in the folder `/_site/`.  
+All the files there are generated with [Jekyll](https://jekyllrb.com/).  
 
 
-BUILD WEBSITE
+
+HOW MAKE CHANGES / MODIFY PAGES
 --------------
 
-execute
+1  get most recent version of the git repo:
 
-    make
+    git pull;
+	
+2  make changes in root folder (not /_site/index.html, read )  
+cf. [Jekyll documentation](https://jekyllrb.com/)  
 
-in the terminal.  
-It will execute the file `makefile` and create everything that should be in `build`.
+3 build
 
+    jekyll build;
+    
+3 deploy:	
 
-
-HOW TO MODIFY
-==============
-
-1  get most recent version:
-
-	git pull
-2  make changes in index.html (not build/index.html)
-3 deploy	
-
-	cd zapadisk; make; cd build; surge; cd ..;
+    cd _site; surge; cd ..;
 	
 4 share changes: 
 
-	git add .; git commit -m "whatyouchanged"; git push;
+    git add .; git commit -m "whatyouchanged"; git push;
 
 
 
