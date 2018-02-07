@@ -1,10 +1,12 @@
 
 
+# -----------------------------------------------
+# THIS FILE IS DEPRECIATED --> MOVED TO JEKYLL
+# -----------------------------------------------
+
+
+
 # npm install -g htmlprocessor
-
-
-
-
 
 project = zapadisk
 # BUILD_DIR = ../$(project)/build/
@@ -95,7 +97,7 @@ copies:
 # CLEAN
 #########################################################################
 clean:
-	rm -r $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 	
 	
 
