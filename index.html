@@ -1,3 +1,9 @@
+---
+# layout: page
+# title: xxx
+# permalink: btd/
+---
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,28 +13,171 @@
 	<title>Zapadisk Ultimate</title>
 	<meta name="description" content="Zapadisk équipe belge ultimate frisbee de Schaerbeek">
 	
-	<link rel="icon" type="image/png" href="img/zapadisk_favicon.png">
+	<link rel="icon" type="image/png" href="assets/img/zapadisk_favicon.png">
 
 	<!-- CSS  -->
 <!-- build:css css/zapadisk.min.css -->
 	<!-- <link href="min/plugin-min.css" type="text/css" rel="stylesheet"> -->
 	<!-- <link href="min/custom-min.css" type="text/css" rel="stylesheet"> -->
 	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">-->
-	<link rel="stylesheet" href="css/materialize0.99.0.min.css">
+	<link rel="stylesheet" href="assets/css/materialize0.99.0.min.css">
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.css"> -->
 	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 	<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 	<!--<link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">-->
 	<!--<link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">-->
-	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css">
 	<style>
-		@media only screen and (min-width: 993px) {
-			.card {
-				/*min-height: 200px ;*/
+		/*@media only screen and (min-width: 993px) { .card { min-height: 200px ; } }*/
+		
+		@font-face {
+		    font-family: 'SoulMission';
+		    src:	url('../assets/fonts/SoulMission.woff2') format('woff2')
+		    ,		url('../assets/fonts/SoulMission.ttf.woff') format('woff')
+			/*,		url('../fonts/SoulMission.ttf.svg#SoulMission') format('svg'),
+		   url('../fonts/SoulMission.ttf.eot'),
+		   url('../fonts/SoulMission.ttf.eot?#iefix') format('embedded-opentype')*/
+		        ; 
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		/* MODIFS ------------------------------------------------------------ */
+	
+		.brand-logo{
+			position: absolute;
+			color: #fff;
+			display: inline-block;
+			/*font-size: 2.1rem;*/
+			font-style: normal;
+			font-weight: 100;
+			/*font-weight: 400;*/
+			padding: 0;
+			letter-spacing: 4px;
+			
+			/*font-family: 'Rock Salt', cursive;*/
+			/*font-family: 'Black Ops One', cursive;*/
+			font-family: 'SoulMission';
+			color: black;
+			/*font-size: 2.1rem;*/
+		    font-weight: 400;
+		    font-size:88px !important;
+		    margin-top:20px;
+		}
+		.brand-logo small{
+			/*font-family: "Roboto", sans-serif;*/
+			/*font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;*/
+		
+			letter-spacing: normal;
+			font-size: 0.5em;
+			font-weight: 100;
+			/*text-transform: uppercase;*/
+			text-transform: lowercase;
+			font-variant: small-caps;
+			/*padding-left: 15px;*/
+			padding-top: -20px;
+			position: relative;
+			top:-30px;
+		}
+		
+		@media only screen and (max-width: 992px) {
+			.brand-logo{
+			    font-size:76px !important;
+			}
+			.brand-logo small{
+				font-size: 0.4em;
+				top:-35px;
 			}
 		}
+		@media only screen and (max-width: 600px) {
+			.brand-logo{
+			    font-size:64px !important;
+			}
+			.brand-logo small{
+				font-size: 0.4em;
+				top:-45px;
+				/*padding-bottom: 40px;*/
+			}
+		}
+		
+		
+		
+		/*h1 img{
+			width:50%;
+		}*/
+		nav ul a, nav a, h2, h3, h4, h5 {
+			color: #666;
+		}
+		h5{
+			font-size: 1.4rem;
+			font-weight: 300;
+		}
+		h6{
+			font-weight: 400;
+		}
+		nav .brand-logo, .card-title {
+			color: #393939 ;
+		}
+		
+		/*.brand-logo {*/
+		    /*font-size:2.1rem;*/
+		/*}*/
+		/*nav .brand-logo {
+		    font-weight: 400;
+		    font-size:3rem;
+		}*/
+		.text_h {
+		    padding: 10% 0;
+		}
+		.small05{
+			font-size: 0.5em;
+			/*color:#999;*/
+		}
+		/*.small08{*/
+		/*	font-size: 0.8em;*/
+		/*}*/
+		/*.small09{*/
+		/*	font-size: 0.9em;*/
+		/*}*/
+		.biggertext{
+			font-size: 1.2em;
+		}
+		.monospace-font, a {
+		  font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+		}
+		a:hover {
+			opacity:0.8;
+			/*text-decoration: underline !important;*/
+		}
+		
+		.nav-wrapper h1{ padding:0; margin: 0; }
+		.toast{ max-width: 280px; }
+		.hyphenate{ word-break: initial; }
+		.justify{ text-align: justify; }
+		
+		
+		/*lessen gaps between cards*/
+		div.card-content > div.row{
+			margin-bottom:0;
+		}
+		
+		/* restore ndashes in lists */
+		ul li {
+		    margin-left: 15px;
+		}
+		ul li::before {
+		    margin-left: -15px;
+		    content: "– ";
+		}
+		
+		footer{
+			margin-bottom:30px;
+		}
+		
+		
 	</style>
 <!--/build-->
+
 </head>
 <body id="top" class="scrollspy">
 
@@ -48,11 +197,11 @@
 
 <!--Navigation-->
 <div class="navbar ">
-	<nav id="nav_f" class="default_color" role="navigation">
+	<nav id="nav_f" class="white" role="navigation">
 		<div class="container">
 			<div class="nav-wrapper">
 				<h1 class="">
-					<span href="#" class="brand-logo center paddingTop20">Zapadisk<br><small class="small05 grey-text  ">Ultimate</small></span>
+					<span href="#" class="brand-logo brand-logo center paddingTop20">Zapadisk<br><small class="small05 grey-text text-darken-1">Ultimate</small></span>
 					<!--hide-on-med-and-down-->
 				</h1>
 			</div>
@@ -63,12 +212,12 @@
 
 
 <!--Hero-->
-<div class="section no-pad-bot " id="index-banner">
+<div class="section no-pad-bot " id="">
 	<div class="container">
 		<div class="row">
 			<div class="col m8 offset-m2">
 				<div class="text_h center header cd-headline letters type">
-					<img id="biglogo" class="responsive-img" src="img/zapadisk.png" alt="">
+					<img id="biglogo" class="responsive-img" src="assets/img/zapadisk.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -115,13 +264,26 @@
 						
 						<p class="monospace-font ">
 							<a href='mailto&#58;co&#110;tac%74&#64;za&#112;&#97;&#100;&#37;69%73%6B%2E&#98;e'>co&#110;ta&#99;&#116;&#64;zap&#97;&#100;i&#115;k&#46;&#98;e</a> / 
-							<a href="https://www.facebook.com/Zapadisk-126294821330014/">Facebook</a>
+							<a href="http://www.facebook.com/Zapadisk-126294821330014/">Facebook</a>
 						</p>
 						
 					</div>
 				</div>
 			</div>
 			
+			
+			<div class="col s12 l6">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Balance Ton Disc</span>
+						
+						<p class="monospace-font ">
+							<a href="btd">Balance Ton Disc</a>
+						</p>
+						
+					</div>
+				</div>
+			</div>
 		<!--</div> <div class="row">-->
 			
 			
@@ -187,7 +349,7 @@
 							</div>
 							<div class="col s12 m6">
 								<p class="light center">
-									<a class="waves-effect waves-light btn blue-grey darken-4" href="https://www.google.be/maps/place/Complexe+Sportif+Teldert/@50.867078,4.3858891,15.61z/data=!4m5!3m4!1s0x47c3c340a0e055af:0x1fd5fd00c99cfbdf!8m2!3d50.8671617!4d4.3916207">Ourvir le plan</a>
+									<a class="waves-effect waves-light btn blue-grey darken-4 white-text" href="https://www.google.be/maps/place/Complexe+Sportif+Teldert/@50.867078,4.3858891,15.61z/data=!4m5!3m4!1s0x47c3c340a0e055af:0x1fd5fd00c99cfbdf!8m2!3d50.8671617!4d4.3916207">Ourvir le plan</a>
 								</p>
 							</div>
 						</div>
@@ -431,11 +593,6 @@
 </div>
 
 
-<!--Parallax-->
-<!-- <div class="parallax-container">
-	<div class="parallax"><img src="img/parallax1.png"></div>
-</div> -->
-
 
 <!--Footer-->
  <footer id="contact" class="page-footer white scrollspy">
@@ -458,9 +615,9 @@
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script> -->
 	
 	
-	<!--<script src="js/jquery.hypher.min.js"></script>-->
-	<!--<script src="js/en-us.js"></script>-->
-	<!--<script src="js/fr.js"></script>-->
+	<!--<script src="assets/js/jquery.hypher.min.js"></script>-->
+	<!--<script src="assets/js/en-us.js"></script>-->
+	<!--<script src="assets/js/fr.js"></script>-->
 	
 	
 	<script>
