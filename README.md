@@ -8,7 +8,7 @@ FILES
 --------------
 
 The root of this project contains the source files.  
-The actual website is in the folder `/_site/`.  
+The actual website is in the folder `/docs/`.  
 All the files there are generated with [Jekyll](https://jekyllrb.com/).  
 
 
@@ -20,7 +20,7 @@ HOW MAKE CHANGES / MODIFY PAGES
 
     git pull;
 	
-2  make changes in root folder (not /_site/index.html, read )  
+2  make changes in root folder (not /docs/index.html, read )  
 cf. [Jekyll documentation](https://jekyllrb.com/)  
 
 3 build
@@ -29,7 +29,7 @@ cf. [Jekyll documentation](https://jekyllrb.com/)
     
 3 deploy:	
 
-    cd _site; surge; cd ..;
+    cd docs; surge; cd ..;
 	
 4 share changes: 
 
