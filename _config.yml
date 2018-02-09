@@ -18,7 +18,7 @@ exclude: [
     ]
 # Build settings
 # markdown: kramdown
-
+# theme: minima
 
 # minify css from scss
 # sass:
@@ -33,5 +33,5 @@ plugins:
     - jekyll-minifier
 
 # jekyll-minifier:
-    # remove_multi_spaces: true
-    # remove_intertag_spaces: true
+#     remove_multi_spaces: true
+#     remove_intertag_spaces: true
