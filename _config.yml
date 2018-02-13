@@ -27,13 +27,11 @@ exclude: [
 #     style: :compressed
     
 # minify html ---------------------------
-
-    # gem install jekyll-minifier
-    # https://github.com/digitalsparky/jekyll-minifier
-
+# gem install jekyll-minifier
+# https://github.com/digitalsparky/jekyll-minifier
 plugins:
     - jekyll-minifier
-
-# jekyll-minifier:
+jekyll-minifier:
+    exclude: 'assets/js/tg.js'
 #     remove_multi_spaces: true
 #     remove_intertag_spaces: true
