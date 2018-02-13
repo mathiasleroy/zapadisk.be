@@ -7,20 +7,20 @@ ultimate team website [zapadisk.be](http://zapadisk.be/)
 FILES
 --------------
 
-The root of this project contains the source files.  
-The actual website is in the folder `/docs/`.  
-All the files there are generated with [Jekyll](https://jekyllrb.com/).  
+The root contains the source files.  
+The website is in the folder `/docs`.  
+This folder is generated with [Jekyll](https://jekyllrb.com/).  
 
 
 
-HOW MAKE CHANGES / MODIFY PAGES
+HOW TO MAKE CHANGES / MODIFY PAGES
 --------------
 
-1  get most recent version of the git repo:
+1  get the most recent version of the git repo:  
 
     git pull;
 	
-2  make changes in root folder (not /docs/index.html, read )  
+2  make changes in root folder (not /docs)  
 cf. [Jekyll documentation](https://jekyllrb.com/)  
 
 3 build
