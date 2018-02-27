@@ -11,7 +11,7 @@ custom_css:
 custom_js:
 - //cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
 - //cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js
-- //addevent.com/libs/atc/1.6.1/atc.min.js
+#- //addevent.com/libs/atc/1.6.1/atc.min.js
 ---
 
 	<style>
@@ -53,8 +53,7 @@ custom_js:
 		.btn-spaced{
 			margin:5px;
 		}
-		.addeventatc{
-			/*color: white !important;*/
+		/*.addeventatc{
 		}
 		div .addeventatc{
 			color: white !important;
@@ -66,7 +65,7 @@ custom_js:
 		}
 		span.addeventatc_dropdown em.copyx{
 			display:none;
-		}
+		}*/
 	</style>
 
 </head>
@@ -174,7 +173,7 @@ custom_js:
 								<li>Possibilité de s’inscrire comme fille seule, on tentera de soit les inclure dans une équipe soit créer une équipe en plus.</li>
 							</ul>
 							<!-- Button code -->
-							<div title="Add to Calendar" id="forceWhite" class="white-text addeventatc grey darken-4" color="white">
+							<!--<div title="Add to Calendar" id="forceWhite" class="white-text addeventatc grey darken-4" color="white">
 								AJOUTER AU CALENDRIER
 								<span class="date_format">DD/MM/YYYY</span>
 								<span class="start">02/06/2018 08:00</span>
@@ -186,8 +185,12 @@ custom_js:
 								<span class="organizer">Zapadisk</span>
 								<span class="organizer_email">btd@zapadisk.be</span>
 								<span class="location">Complexe Sportif Teldert, Schaerbeek</span>
-								<span class="alarm_reminder">1440</span> <!--1day 60*24-->
-							</div>
+								<span class="alarm_reminder">1440</span>
+							</div>-->
+							
+							<a class="btn btn-spaced white-text grey darken-4" href="../assets/btd.ics" ><i class="material-icons left">event</i> Télécharger .ics</a>
+							<!--<a class="btn btn-spaced white-text grey darken-4" href="../assets/btd.ics" ><i class="material-icons left">event</i> Add To Google Calendar</a>-->
+							
 							<p>
 								<!--http://robspangler.com/blog/encrypt-mailto-links-to-stop-email-spam/-->
 								<strong>Contact :</strong> <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#98;&#116;&#100;&#64;&#122;&#x61;&#112;&#x61;&#x64;&#105;&#x73;&#x6b;&#x2e;&#98;&#101;">btd@zapadisk.be</a>
@@ -290,21 +293,9 @@ custom_js:
 								<li>Jongens welkom om te ondersteunen</li>
 								<li>Mogelijkheid om als alleenstaand meisje te registreren, we zullen proberen ze in een team op te nemen of een team en meer te maken.</li>
 							</ul>
-							<!-- Button code -->
-							<div title="Add to Calendar" id="forceWhite" class="white-text addeventatc grey darken-4" color="white">
-								VOEG TOE AAN KALENDER
-								<span class="date_format">DD/MM/YYYY</span>
-								<span class="start">02/06/2018 08:00</span>
-								<span class="end">03/06/2018 18:00</span>
-								<span class="all_day_event">true</span>
-								<span class="timezone"><span class="timezone">Europe/Paris</span></span>
-								<span class="title">Balance Ton Disc</span>
-								<span class="description">Toernooi Ultimate Frisbee</span>
-								<span class="organizer">Zapadisk</span>
-								<span class="organizer_email">btd@zapadisk.be</span>
-								<span class="location">Complexe Sportif Teldert, Schaerbeek</span>
-								<span class="alarm_reminder">1440</span> <!--1day 60*24-->
-							</div>
+							
+							<a class="btn btn-spaced white-text grey darken-4" href="../assets/btd.ics" ><i class="material-icons left">event</i> Download .ics</a>
+							
 							<p>
 								<strong>Contact:</strong> <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#98;&#116;&#100;&#64;&#122;&#x61;&#112;&#x61;&#x64;&#105;&#x73;&#x6b;&#x2e;&#98;&#101;">btd@zapadisk.be</a>
 							</p>

@@ -16,6 +16,7 @@ permalink: pretty
 exclude: [
         'makefile',
         'README.md',
+        'score-calculator.html',
         # 'CNAME',
     ]
 # Build settings
