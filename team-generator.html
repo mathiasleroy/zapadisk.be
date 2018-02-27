@@ -28,7 +28,7 @@ permalink: team-generator
 			font-family: monospace;
 		}
 		.paddingTop20{
-			padding-top:20;
+			padding-top: 20px;
 		}
 		span.tooltipped{
 			/*text-decoration: underline;*/
@@ -102,7 +102,7 @@ permalink: team-generator
 
 <div class="container">
 		
-	<h1>Zapadisk Team Generator <small class="grey-text text-darken-1">v1.1</small></h1>
+	<h1>Zapadisk Team Generator <small class="grey-text text-darken-1">v2.0</small></h1>
 	
 	<section id="inputSection">
 			
@@ -144,7 +144,7 @@ permalink: team-generator
 				</div>
 				<div class="col s3">
   
-					<button id="submitButton" class="btn waves-effect waves-light" type="button" name="action">Submit
+					<button id="submitButton" class="btn waves-effect waves-light" type="button" name="action">Run
 						<i class="material-icons right">send</i>
 					</button>
 					
@@ -158,13 +158,13 @@ permalink: team-generator
 				    	<input type="number" id="nteams" min="2" max="10" >
 				    </p>-->
 			        <div class="input-field">
-			          <input value="50" id="nruns" type="text" class="validat" min="20" max="1000">
+			          <input value="50" id="nruns" type="text" class="validat" min="1" max="1000">
 			          <label for="nruns">Runs:</label>
 			        </div>
-			        <!--<div class="input-field">
-			          <input value="2" id="nteams" type="text" class="validat" min="2" max="2">
-			          <label for="ntems">Teams:</label>
-			        </div>-->
+			        <div class="input-field">
+			          <input value="2" id="nteams" type="text" class="validat" min="2" max="10">
+			          <label for="nteams">Teams:</label>
+			        </div>
 			        <div class="input-field">
 			          <input value="[3, 3, 3, 1]" id="weights" type="text" class="validat">
 			          <label for="weights">Weights:</label>
@@ -172,8 +172,8 @@ permalink: team-generator
 				</div>
 			</form>
 			
-			<div>
-				<h5>What does it do?</h5>
+			<div class="paddingTop20">
+				<h5 class="paddingTop20">What does it do?</h5>
 				<p>
 					This tool will split a list of players into the most even teams possible.
 					<br>This means: having
@@ -186,34 +186,124 @@ permalink: team-generator
 				</ul>
 			</div>
 			
+			
 			<div>
-				<h5>How does it work?</h5>
+				<h5 class="paddingTop20">How to use it?</h5>
+				<div class="row">
+					<div class="col m7">
+						<p>
+							Make a list of your players in an spreadsheet (MS Excel, Google Spreadsheet, LibreOffice&hellip;). <br>One line per player, and columns in this order:
+						</p>
+						<ol>
+							<li>The name of the player (any text, <i>e.g.</i> First name, Last name)</li>
+							<li>The level of the player (any number)</li>
+							<li>The gender of the player (F or M)</li>
+							<li>The attendance of the player on day 1 (0&ndash;1) <br>(0=not present ; 1=present ; anything between can a percetage or a probability of being present)</li>
+							<li>The attendance of the player on day 2 (idem)</li>
+							<li>The attendance of the player on day &hellip;</li>
+						</ol>
+						<p>
+							Then copy-paste this in the text area above, without headers.
+							<br>And then select options:
+						</p>
+						<ul class="dashed">
+							<li>Runs: tests with ~20, recommended >~500 (requires more processor)</li>
+							<li>Teams: how many teams to you want to generate</li>
+							<li>Weights: this is the importance accorded to the 4 criteria [attendance, gender, level, gender per day], you can leave defaults.</li>
+						</ul>
+						<p>And press "RUN"</p>
+					</div>
+				
+					<div class="col m5">
+						
+						<p><i>e.g.</i></p>
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Level</th>
+									<th>Gender</th>
+									<th>Day1</th>
+									<th>Day2</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Naëlle Martin</td>
+									<td>2</td>
+									<td>F</td>
+									<td>1</td>
+									<td>1</td>
+								</tr>
+								<tr>
+									<td>Pablo Jacobs</td>
+									<td>4</td>
+									<td>M</td>
+									<td>1</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>Céleste Renard</td>
+									<td>2</td>
+									<td>M</td>
+									<td>0</td>
+									<td>1</td>
+								</tr>
+								<tr>
+									<td>Charlie Lambert</td>
+									<td>8</td>
+									<td>F</td>
+									<td>1</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<td>Candice Derauw</td>
+									<td>10</td>
+									<td>F</td>
+									<td>1</td>
+									<td>1</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<h5 class="paddingTop20">How does it work?</h5>
 				<ol>
-					<li>Shuffle the players list.</li>
+					<li>Shuffle the initial players list.</li>
 					<li>Split the list in even teams.</li>
 					<li>Compute how different these teams are in one index number.</li>
 					<li>Make a random swap between 2 players of 2 different teams.</li>
 					<li>If this swap reduces the difference between the teams then keep it, otherwise revert it.</li>
 					<li>Do this until nothing improves for a long time.</li>
+					<!--<li></li>-->
 				</ol>
+				<p>
+					&rarr;We reached a local optimum
+					<br>Do this multiple times (runs) to find several global optimums and local optimums.
+					<br>And finally do this again until we reach the best local optimum we found so far.
+				</p>
+			</div>
+			
+			<div>
+				<h5 class="paddingTop20">Tips</h5>
+				<ul class="dashed">
+					<li>If you want to generate a strong team and a weak team, instead of mixing levels, you can write a negative number for the 3<sup>rd</sup> weight (<i>e.g.</i> [3, 3, -3, 1])</i></sup></li>
+					<li>It's possible to force 2 players to be togheter or apart by changing attendance values. (<i>e.g.</i> -1000 and 1000 will force these 2 players to be togheter. 1000 and 1000 will force them to be separate</li>
+				</ul>
 			</div>
 			
 			<!--<div>
-				<h5>Tips</h5>
+				<h5 class="paddingTop20>Upcoming changes</h5>
 				<ul class="dashed">
-					<li>It's possible to force 2 players to be togheter or apart by adding an attendace day column and writing fake numbers like -1k and 1k</li>
+					<li>Allow to change the number of teams (currently fixed to 2)</li>
 				</ul>
 			</div>-->
 			
 			<div>
-				<h5>Upcoming changes</h5>
-				<ul class="dashed">
-					<li>Allow to change the number of teams (currently fixed to 2)</li>
-				</ul>
-			</div>
-			
-			<div>
-				<h5>Questions & Feedback</h5>
+				<h5 class="paddingTop20">Questions & Feedback</h5>
 				<p class="monospace-font ">
 					<!--http://robspangler.com/blog/encrypt-mailto-links-to-stop-email-spam/-->
 					<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#109;&#97;&#x74;&#104;&#x69;&#x61;&#x73;&#x40;&#122;&#x61;&#x70;&#x61;&#100;&#105;&#x73;&#x6b;&#x2e;&#x62;&#101;">mathias@zapadisk.be</a>

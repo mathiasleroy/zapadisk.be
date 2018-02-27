@@ -22,5 +22,6 @@ i{font-size:1.5rem}.card-avatar .card-content .card-title{line-height:30px !impo
 /* AJOUTS */
 /*---------------------------------------*/
 footer{
-	margin-bottom:50px;
+	margin-bottom:100px;
+	/*margin-top:100px !important;*/
 }
