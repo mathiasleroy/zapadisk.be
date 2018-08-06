@@ -7,7 +7,7 @@
 <!--https://www.xml-sitemaps.com/-->
 <url>
   <loc>http://zapadisk.be/</loc>
-  <lastmod>2018-02-09T14:51:03+00:00</lastmod>
+  <lastmod>2018-08-06T14:00:00+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
@@ -18,12 +18,12 @@
 <url>
   <loc>http://zapadisk.be/team-generator.html</loc>
   <lastmod>2018-02-09T14:51:03+00:00</lastmod>
-  <priority>0.70</priority>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>http://zapadisk.be/index.html</loc>
-  <lastmod>2018-02-09T14:51:03+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2018-08-06T14:00:00+00:00</lastmod>
+  <priority>0.7</priority>
 </url>
 
 
