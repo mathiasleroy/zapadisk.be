@@ -18,12 +18,12 @@ HOW TO MAKE CHANGES / MODIFY PAGES
 
 1  get the most recent version of the git repo:  
 
-    git pull;
+    git pull origin master;
 	
 2  make changes in root folder (not /docs)  
 cf. [Jekyll documentation](https://jekyllrb.com/)  
 
-3 build
+3 build -> compiles into 'docs' folder
 
     jekyll build;
     
