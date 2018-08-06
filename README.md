@@ -1,7 +1,8 @@
 Zapadisk.be
 =================
 
-ultimate team website [zapadisk.be](http://zapadisk.be/)
+Ultimate frisbee team website [zapadisk.be](http://zapadisk.be/)  
+Team Generator tool: http://zapadisk.be/team-generator.html
 
 
 FILES
