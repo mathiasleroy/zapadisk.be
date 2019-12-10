@@ -17,28 +17,26 @@ This folder is generated with [Jekyll](https://jekyllrb.com/).
 HOW TO MAKE CHANGES / MODIFY PAGES
 --------------
 
-1  get the most recent version of the git repo:  
+1. get the most recent version of the git repo:  
 
     git pull origin master;
 	
-2  make changes in root folder (not /docs)  
+2. make changes in root folder (not /docs)  
 cf. [Jekyll documentation](https://jekyllrb.com/)  
 
-3 build -> compiles into 'docs' folder
+3. build -> compiles into 'docs' folder
 
     jekyll build;
     
-3 deploy:	
+4. deploy:	
 
     cd docs; surge; cd ..;
 	
-4 share changes: 
+5. share changes: 
 
     git add .; git commit -m "whatyouchanged"; git push;
 
 
-
-    
 
 RESOURCES
 --------------
