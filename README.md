@@ -35,6 +35,8 @@ cf. [Jekyll documentation](https://jekyllrb.com/)
 5. share changes: 
 
     git add .; git commit -m "whatyouchanged"; git push;
+    
+    first time:  git push -u origin master
 
 
 
