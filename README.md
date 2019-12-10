@@ -39,6 +39,10 @@ cf. [Jekyll documentation](https://jekyllrb.com/)
     first time:  git push -u origin master
 
 
+Gender-Stats is deployed as a standalone app on https://zapagender.surge.sh for the pwa installation to work.
+
+  cd gender-stats; surge; cd ..;
+
 
 RESOURCES
 --------------
