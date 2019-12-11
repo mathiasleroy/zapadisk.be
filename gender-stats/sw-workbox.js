@@ -1,5 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 
+workbox.googleAnalytics.initialize();
+
 const assets = [ // == cachefirst
   'site.webmanifest',
   // ,'assets/img/favicons/apple-touch-icon.png'
@@ -10,6 +12,8 @@ const assets = [ // == cachefirst
   ,'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js'
   ,'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css'
   ,'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js'
+  // ,'https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js'
+  // ,'https://cdn.jsdelivr.net/npm/vue-echarts@4.0.2'
 ];
 
 // -------------------------------------- precacheAndRoute = cache-first
@@ -77,5 +81,3 @@ workbox.routing.registerRoute(
   })
 );
 
-
-workbox.googleAnalytics.initialize();
