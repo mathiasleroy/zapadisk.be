@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   
-
-  <title>Ultimate Frisbee Game Gender Stats Tracker</title>
-  <meta name="description" content="Ultimate Frisbee Game Stats Tracker">
+  <title>Ultimate Gender Stats</title>
+  <meta name="description" content="Ultimate Frisbee Game Gender Stats Tracker">
   <meta name="author" content="Mathias Leroy">
 
   <link rel="shortcut icon" type="image/png" sizes="32x32" href="assets/img/zapadisk_32x32.png" >
@@ -14,10 +13,7 @@
 
   <link rel="manifest" href="site.webmanifest" crossorigin="use-credentials">
 
-  
-  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">-->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
 
@@ -74,23 +70,13 @@
   <div id="app">
     <v-app id="">
       <v-content >
-          <!-- <keep-alive> <router-view></router-view> </keep-alive> -->
 
 <v-container class="pa-0"> <v-row no-gutters> <v-col align="center">
 
 <v-card tile max-width="770" align="left" class="elevation-24">
 
 <!-- TITLE -->
-  <!-- <v-card-title class="text-center justify-center pa-0"> -->
-    <!-- <v-icon x-large class="mt-5 ml-auto">mdi-gender-male-female</v-icon> -->
-    <!-- <v-btn fab  class="mt-5 pr-0 ml-auto"> -->
-      <!-- <v-icon color="blue">mdi-information</v-icon> -->
-      <!-- Help -->
-    <!-- </v-btn> -->
-  <!-- </v-card-title> -->
-
   <v-card-title class="text-center justify-center py-6">
-
     <h1 class="display-2">
       <v-icon large>mdi-gender-male-female</v-icon>
       Gender Stats
@@ -100,36 +86,23 @@
 
 <!-- TABS -->
     <v-tabs v-model="tab" grow icons-and-text>
-
-      <v-tab href="#tab1">
-        game
+      <v-tab href="#tab1"> game
         <v-icon>mdi-format-list-checks</v-icon>
       </v-tab>
-
-      <v-tab href="#tab2">
-        Track
+      <v-tab href="#tab2"> Track
         <v-icon>mdi-record</v-icon>
       </v-tab>
-
-      <v-tab href="#tab3">
-        Stats
+      <v-tab href="#tab3"> Stats
         <v-icon>mdi-chart-bar</v-icon>
       </v-tab>
-
-      <v-tab href="#tab4">
-        Export
+      <v-tab href="#tab4"> Export
         <v-icon>mdi-download</v-icon>
       </v-tab>
-
-      <!-- <v-tab href="#tab5">
-        About
-        <v-icon>mdi-information</v-icon>
-      </v-tab> -->
-
     </v-tabs>
+    
 
 <!-- PAGES -->
-    <v-tabs-items v-model="tab">
+    <v-tabs-items v-model="tab" touchless >
 
       <v-btn small fixed dark fab bottom right color="info" @click="modalInfo = !modalInfo">
         <v-icon>mdi-information-variant</v-icon>
@@ -250,40 +223,6 @@
             </v-card>
           </v-tab-item>
 
-            <!-- <v-expansion-panels accordion mandatory>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">GAME</v-expansion-panel-header>
-                <v-expansion-panel-content>
-
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">TRACK</v-expansion-panel-header>
-                <v-expansion-panel-content>
-
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">STATS</v-expansion-panel-header>
-                <v-expansion-panel-content>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">EXPORT</v-expansion-panel-header>
-                <v-expansion-panel-content>
-
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-
-            </v-expansion-panels> -->
-
-
-          <!-- </v-card-text> -->
-
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="modalInfo = false">Close</v-btn>
@@ -297,6 +236,8 @@
       <v-tab-item value="tab1" eager :transition="false" :reverse-transition="false">
         <v-card flat>
           <v-card-text class="">
+            
+            
             <v-row>
               <v-col cols="12" align="center">
                 <!-- <div align="center"> -->
@@ -314,16 +255,7 @@
             </v-row>
 
 
-            <!-- <h2 class="overline">1. Create Game</h2> -->
             <v-dialog v-model="modalCreateGame" fullscreen hide-overlay transition="dialog-bottom-transition">
-
-              <!-- <template v-slot:activator="{ on }">
-                <div align="center">
-                  <v-btn dark class="ma-1" v-on="on">
-                    <v-icon left>mdi-plus</v-icon> Create Game
-                  </v-btn>
-                </div>
-              </template> -->
 
               <v-card tile>
                 <v-toolbar dark >
@@ -339,6 +271,7 @@
                 <v-card-text class="pa-0">
                   <v-container>
                     <v-row >
+                      
                       <v-col cols="12" sm="6" class="">
                         <v-text-field v-model="game.name" label="Game Name*" required clearable
                         persistent-hin hint="Unique ID! suggested: Tournament-Opponent"></v-text-field>
@@ -359,9 +292,7 @@
                       <v-col cols="12" sm="6" class="">
                         <v-text-field v-model="game.date" type="date" label="Date"></v-text-field>
                       </v-col>
-
-                      <!-- textarea -->
-
+                      
                     </v-row>
                   </v-container>
 
@@ -369,11 +300,6 @@
                 </v-card-text>
               </v-card>
             </v-dialog>
-
-                <!-- <v-btn class="ma-1" dark @click="uploadGame()">
-                  <v-icon left>mdi-upload</v-icon> upload Game
-                </v-btn> -->
-                
 
 
   <!-- LIST GAMES -->
@@ -413,7 +339,24 @@
                 </v-list-item-group>
               </v-list>
 
-              <!-- {{selectedGame}} -->
+      
+<!--<v-row >-->
+  <!--<v-chart-pie :data="piedata"></v-chart-pie>-->
+  
+  <!--VUE VEGA TEST-->
+    <!--<vega-lite
+      :data="[
+          {a: 'A', b: 28}, {a: 'B', b: 55}, {a: 'C', b: 43},
+          {a: 'D', b: 91}, {a: 'E', b: 81}, {a: 'F', b: 53},
+          {a: 'G', b: 19}, {a: 'H', b: 87}, {a: 'I', b: 52}
+        ]" mark="bar" :encoding="{
+          x: {field: 'a', type: 'ordinal'},
+          y: {field: 'b', type: 'quantitative'}
+        }">
+    </vega-lite>-->
+<!--</v-row>-->
+
+
 
 
           </v-card-text>
@@ -577,8 +520,6 @@
             </template>
 
 
-            <!-- <v-divider></v-divider> -->
-
           <h4 class="overline mt-5">All Points</h4>
 
           <!-- SAVED EVENTS -->
@@ -588,39 +529,21 @@
                    <tr>
                      <th class="text-left">Point</th>
                      <th class="text-left">Events</th>
-                     <!-- <th class="text-left">First</th> -->
-                     <!-- <th class="text-left">Last</th> -->
                    </tr>
                  </thead>
                  <tbody>
                    <tr v-for="(point, i) in points" :key="point">
                      <td>{{ i+1 }}</td>
                      <td>{{ point.join('>') }}</td>
-                     <!-- <td>{{ point[0] }}</td> -->
-                     <!-- <td>{{ point.slice().pop() }}</td> -->
                    </tr>
                    <tr>
                      <td>{{ points.length+1 }}</td>
                      <td>{{ point.join('>') }}</td>
-                     <!-- <td>{{ point[0] }}</td> -->
-                     <!-- <td>{{ point.slice().pop() }}</td> -->
                    </tr>
                  </tbody>
                </template>
              </v-simple-table>
-
-
-          <!-- SAVED EVENTS -->
-          <!-- <div v-for="(point, i) in points">
-            <div class="overline">Point {{i+1}}</div>
-            <span v-for="event in point">
-              > {{event}}
-            </span>
-          </div>
-          <div class="overline">Point {{points.length+1}}</div>
-          <span v-for="(event, i) in point">
-            > {{event}}
-          </span> -->
+             
 
           <h4 class="overline mt-5">Score</h4>
 
@@ -648,8 +571,6 @@
               </div>
             </div>
 
-
-
           </v-card-text>
 
           <v-card-text v-else class="text-cente mt-5 px-5 mx-5">
@@ -675,6 +596,7 @@
                 <!-- <v-btn class="px-2" small value="Parity/Point">Parity/Point</v-btn> -->
               </v-btn-toggle>
             </div>
+
 
             <h2 class="overline mt-5">Gender Stats</h2>
             <v-simple-table dense >
@@ -749,6 +671,12 @@
             </v-simple-table>
 
 
+
+            <div class="d-flex justify-center">
+              <v-chart-pie :data="piedata"></v-chart-pie>
+            </div>
+            
+            
             
 
           </v-card-text>
@@ -803,17 +731,6 @@
         </v-card>
       </v-tab-item>
 
-<!-- PAGE5 -->
-      <v-tab-item value="tab5" eager>
-        <v-card flat>
-          <v-card-text>
-            <p>This app is open source and availlable on github.</p>
-            <p>Made by <a href="https://mathiasleroy.com">Mathias Leroy</a> and Zapadisk team</p>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-
-
     </v-tabs-items>
 
 
@@ -828,19 +745,6 @@
         <v-switch v-model="$root.goDark" label="Dark Mode" ></v-switch>
         <!--<v-switch v-model="$root.useMF" label="M-F" ></v-switch>-->
       </v-col>
-      <!-- <v-col cols="6" sm="4">
-        <h4 class="overline">Info</h4>
-        <v-btn small class="mt-3">
-          Help?
-        </v-btn>
-      </v-col> -->
-      <!-- <v-col cols="12" sm="6">
-        <h4 class="overline">Author</h4>
-        <div class="py-4">
-          <a href="https://mathiasleroy.com/">Mathias Leroy</a>
-          — <a href="mail:mathias@zapadisk.be">Contact</a>
-        </div>
-      </v-col> -->
       <v-col cols="12" class="text-center my-5 py-5 o-6 black--text">
           &copy; 2020 
           — <a href="https://zapadisk.be">Zapadisk.be</a>
@@ -882,15 +786,93 @@
 <!--echarts-->
   <!--<script src="https://unpkg.com/browse/echarts@4.5.0/dist/echarts.min.js"></script>-->
   <!--<script src="https://unpkg.com/browse/echarts@4.5.0/dist/echarts-en.min.js"></script>-->
-  <script src="https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-echarts@4.0.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.x/dist/echarts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-echarts@4.x"></script>
+  
+  <!--<script src="https://cdn.jsdelivr.net/npm/vue-vega@1.0.0-alpha.13/dist/vue-vega.min.js"></script>-->
+  <!--<script src="https://unpkg.com/vue-vega"></script>-->
   
   
   
 <!--MAIN APP SCRIPT-->
-  <!-- <script src="app.js"></script> -->
   <script type="text/javascript">
-    // Vue.component('v-chart', ECharts);
+    // Vue.use(VueVega.default)
+    
+    Vue.component('v-chart-pie', {
+      props: ['data', 'title'],
+      components: {
+        'v-chart': VueECharts,
+      },
+      data:() => ({
+        // echartdef_LINE: {
+        //   xAxis: { data: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ] },
+        //   yAxis: { type: 'value' },
+        //   series: [ { type: 'line',
+        //       data: [55, 72, 84, 48, 59, 62, 87, 75, 94, 101, 127, 118]
+        //   }],
+        //   title: { text: 'Monthly Stock Prices', x: 'center', },
+        //   color: ['#127ac2']
+        // },
+        echartdef_PIE: {
+          title: {
+            text: this.title,
+            x: 'center'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          // legend: {
+          //   orient: 'vertical',
+          //   left: 'left',
+          //   data: ['F>F', 'M>M', 'F>M', 'M>F']
+          // },
+          series: [
+            {
+              name: 'aaaa',
+              type: 'pie',
+              radius: ['30%', '60%'],
+              // center: ['50%', '60%'],
+              data: [
+                { value: 546, name: 'F>F' },
+                { value: 310, name: 'M>M' },
+                { value: 234, name: 'F>M' },
+                { value: 135, name: 'M>F' },
+                // { value: 1548, name: 'ee' }
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        },
+      }),
+      watch: {
+        data: function(val, oldval){
+          this.echartdef_PIE.title.text = val;
+        },
+        data: function(ddd, oldval){
+          this.echartdef_PIE.series[0].data = [];
+          Object.keys(ddd).map((label, ii)=> {
+            this.echartdef_PIE.series[0].data.push({'name':label, 'value':ddd[label]});
+          })
+        },
+      }, // /watch: {
+      template: `<div >
+          <v-chart 
+          :options="echartdef_PIE" 
+          autoresize
+          theme="ovilia-green"
+          ></v-chart>
+      </div>`,
+              // style="width:100%"
+              // theme="ovilia-green"
+              // theme="polarTheme"
+    });
     
     var app = new Vue({
       el: '#app',
@@ -912,9 +894,9 @@
           },
         },
       }),
-      // components: {
-      //   'v-chart': ECharts,
-      // },
+      components: {
+        'v-chart': VueECharts,
+      },
 
       // ------------------------------------------------------- DATA
       data: () => ({
@@ -956,17 +938,6 @@
             alignedF: [1,1,1,1,1,2,2,2,2,2,4,4,4,4,4],
             score: '13 — 2',
           },
-          // { name: 'BUIC2 - Zapa vs Lapins',
-          //   date: new Date().toISOString().slice(0, 10),
-          //   // players: ['M','F','M','F'],
-          //   players: {'M':2,'F':9},
-          //   points: [
-          //     ["M-pullpick", "F-goal"],
-          //     ["M-pullpick", "M-catch", "F-catch", "F-goal"],
-          //     ["M-pullpick", "F-catch", "M-catch", "M-catch", "F-goal"],
-          //   ],
-          //   score: '3 — 0',
-          // },
         ],
         game:{
           name: null,
@@ -984,6 +955,9 @@
         currentlyAlignedF:3,
 
         stat_type: 'Count',
+        
+        piedata: {'F>F':45,'F>M':78,'M>F':98,'M>M':12},
+        
 
       }), // /data: () => ({
       
@@ -1099,7 +1073,6 @@
           // console.log(pff, pfm, pmf, pmm);
 
           if(this.stat_type=='Count'){
-            // console.log('Count')
           } 
 
           else if(this.stat_type=='Percentage'){
@@ -1153,16 +1126,16 @@
             throwawaysF = -throwawaysM;
 
             expectedFF = nplf*(nplf-1) ; // number of passes if everyone throws to everyone
-            expectedFM = nplf*nplm ; // number of passes if everyone throws to everyone
-            expectedMF = nplm*nplf ; // number of passes if everyone throws to everyone
-            expectedMM = nplm*(nplm-1) ; // number of passes if everyone throws to everyone
+            expectedFM = nplf*nplm ;
+            expectedMF = nplm*nplf ;
+            expectedMM = nplm*(nplm-1) ;
             // console.log(expectedFF,expectedFM,expectedMF,expectedMM);
             expectedTT = expectedFF+expectedFM+expectedMF+expectedMM;
 
             expectedFF = expectedFF / expectedTT; // proportion on total
-            expectedFM = expectedFM / expectedTT; // proportion on total
-            expectedMF = expectedMF / expectedTT; // proportion on total
-            expectedMM = expectedMM / expectedTT; // proportion on total
+            expectedFM = expectedFM / expectedTT;
+            expectedMF = expectedMF / expectedTT;
+            expectedMM = expectedMM / expectedTT;
             // console.log(expectedFF,expectedFM,expectedMF,expectedMM);
 
             pff = (100* ((pff/ptt) - expectedFF));
@@ -1216,57 +1189,23 @@
             nplm = 0
             nplf = 0
           }
+          
+          // UPDATE PIE CHART 
+          if(this.stat_type!='Parity/Game'){
+            app.$data.piedata = {'F>F':pff,'F>M':pfm,'M>F':pmf,'M>M':pmm};
+          }
 
           return {
             passes: {ff:pff,fm:pfm,mf:pmf,mm:pmm},
             mmmmmmm: [
-              { title:'Players',
-                m:nplm, f:nplf
-                // ppm:(100* nplm/(nplt*0.5) ).toFixed(0), 
-                // ppf:(100* nplf/(nplt*0.5) ).toFixed(0),
-              },
-
-              //       // if we have 4 pulls (2M 2F) and we have 13 players (5M 8F)
-              //       // if parity, we should see 
-              //       // 4*5/13 = 1.54 M-pulls
-              //       // 4*8/13 = 2.46 F-pulls
-              //       // so M has pulled 2/1.54 and F 2/2.46
-              //       // ppm = 2/(4*5/13)
-              { title:'Pull Throws',
-                m:pullsM, f:pullsF
-                // ppm:(100* pullsM/(pullsT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* pullsF/(pullsT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Disk Pickups',
-                m:picksM, f:picksF
-                // ppm:(100* picksM/(picksT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* picksF/(picksT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Defenses',
-                m:defsM, f:defsF
-                // ppm:(100* defsM/(defsT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* defsF/(defsT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Goals',
-                m:goalsM, f:goalsF
-                // ppm:(100* goalsM/(goalsT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* goalsF/(goalsT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Assists',
-                m:assistsM, f:assistsF
-                // ppm:(100* goalsM/(goalsT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* goalsF/(goalsT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Drops',
-                m:dropsM, f:dropsF
-                // ppm:(100* dropsM/(dropsT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* dropsF/(dropsT*nplf/nplt) ).toFixed(0),
-              },
-              { title:'Throwaways /stallouts',
-                m:throwawaysM, f:throwawaysF
-                // ppm:(100* throwawaysM/(throwawaysT*nplm/nplt) ).toFixed(0), 
-                // ppf:(100* throwawaysF/(throwawaysT*nplf/nplt) ).toFixed(0),
-              },
+              { title:'Players', m:nplm, f:nplf },
+              { title:'Pull Throws', m:pullsM, f:pullsF },
+              { title:'Disk Pickups', m:picksM, f:picksF },
+              { title:'Defenses', m:defsM, f:defsF },
+              { title:'Goals', m:goalsM, f:goalsF },
+              { title:'Assists', m:assistsM, f:assistsF },
+              { title:'Drops', m:dropsM, f:dropsF },
+              { title:'Throwaways /stallouts', m:throwawaysM, f:throwawaysF },
             ]
           };
         },
@@ -1329,13 +1268,6 @@
         endPoint(){
           console.log('endPoint()')
 
-          // // compute aligned numbers
-          // nf = this.currentlyAlignedF;
-          // nm = this.games[this.selectedGame].type.split('vs')[0] - nf;
-          // alignedGenders = {'F':nf, 'M':nm};
-          // console.log('alignedGenders',alignedGenders);
-          // this.alignedGenders.push(this.alignedGenders);
-
           this.totalAlignedF.push(this.currentlyAlignedF);
           this.points.push(this.point);
           this.point = [];
@@ -1349,8 +1281,6 @@
           thisGame.score = this.score;
           thisGame.savedate = new Date().toISOString().slice(0, 10);
           thisGame.alignedF = this.totalAlignedF;
-
-
 
           // reset points
           // this.points = [];
@@ -1383,28 +1313,26 @@
         //   else if (this.stat_type=='Count') else return val;
         //   else return val+'%';
         // },
-
+        
       }, // /filters: {
     });
+    
+    
     
 
   </script>
   
 
-<!--SERVICE WORKER-->
+  <!--SERVICE WORKER-->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        // navigator.serviceWorker.register('sw.js')
-        navigator.serviceWorker.register('sw-workbox.js')
-          // .then((reg) => console.log('sw registered'/*, reg*/))
-          // .catch((err) => console.log('sw not registered', err))
-          ;
+        navigator.serviceWorker.register('sw-workbox.js');
       });
     }
   </script>
   
-  
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102498736-2"></script>
   <script>
@@ -1419,10 +1347,9 @@
 
 
 <!-- 
-
 TODO
-
+- show selected game at the top of page ?
+- minify -> faster
 - share games in the cloud ? (with password ?) (accounts?)
 - 
-
  -->

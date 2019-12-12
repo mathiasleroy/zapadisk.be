@@ -3,17 +3,21 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox
 workbox.googleAnalytics.initialize();
 
 const assets = [ // == cachefirst
-  'site.webmanifest',
+  'site.webmanifest'
   // ,'assets/img/favicons/apple-touch-icon.png'
-  // ,'assets/img/favicons/favicon-32x32.png'
+  ,'assets/img/zapadisk_32x32.png'
+  ,'assets/img/zapadisk_192x192.png'
+  // ,'assets/img/zapadisk_512x512.png'
+  // ,'assets/img/zapadisk_1268x1268.png'
 
-  'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
+  ,'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
   ,'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css'
   ,'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js'
   ,'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css'
   ,'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js'
-  // ,'https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js'
-  // ,'https://cdn.jsdelivr.net/npm/vue-echarts@4.0.2'
+  // echarts
+  ,'https://cdn.jsdelivr.net/npm/echarts@4.x/dist/echarts.js'
+  ,'https://cdn.jsdelivr.net/npm/vue-echarts@4.x'
 ];
 
 // -------------------------------------- precacheAndRoute = cache-first
@@ -42,9 +46,11 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({ cacheName: 'static-swr', }) );
 
 
+// https://cdn.jsdelivr.net/npm/@mdi/font@4.x/fonts/materialdesignicons-webfont.woff2?v=4.7.95
 workbox.routing.registerRoute( 
   /.+\.woff/,
   new workbox.strategies.CacheFirst({ cacheName: 'fonts-cf', }) );
+
 
 
 // // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
