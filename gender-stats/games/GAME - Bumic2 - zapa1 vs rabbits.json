@@ -1,0 +1,87 @@
+{
+  "name": "Zapa1 rabits",
+  "date": "2019-12-15",
+  "players": {
+    "M": 4,
+    "F": 5
+  },
+  "type": "5vs5",
+  "points": [
+    [
+      "M-pullpick",
+      "U-throwaway",
+      "M-defense",
+      "M-pick",
+      "M-goal"
+    ],
+    [
+      "M-pullthrow",
+      "O-goal"
+    ],
+    [
+      "F-pullpick",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "U-throwaway",
+      "O-goal"
+    ],
+    [
+      "F-pullpick",
+      "M-catch",
+      "F-catch",
+      "M-catch",
+      "F-catch",
+      "M-catch",
+      "M-catch",
+      "M-goal"
+    ],
+    [
+      "M-pullthrow",
+      "F-defense",
+      "M-pick",
+      "M-catch",
+      "M-goal"
+    ],
+    [
+      "M-pullthrow",
+      "O-throwaway",
+      "M-pick",
+      "M-catch",
+      "F-catch",
+      "F-drop",
+      "O-throwaway",
+      "M-pick",
+      "F-catch",
+      "M-catch",
+      "F-goal"
+    ],
+    [
+      "M-pullthrow",
+      "O-throwaway",
+      "M-pick",
+      "M-catch",
+      "F-goal"
+    ],
+    [
+      "F-pullthrow",
+      "O-goal"
+    ]
+  ],
+  "score": "5 — 3",
+  "savedate": "2019-12-15",
+  "alignedF": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "comments":"manque la première moitié du match"
+}

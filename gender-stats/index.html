@@ -47,6 +47,26 @@
     .fs-16{font-size:1.6rem!important}
     .fs-18{font-size:1.8rem!important}
 
+
+  
+    /* Disables pull-to-refresh */
+    body {
+      overscroll-behavior-y: none;
+      /*overscroll-behavior: none;*/
+      /*overflow-y: hidden;*/
+      
+    /*  z-index: 1;*/
+      /* Allow them to scroll down the document */
+    /*  overflow-y: hidden;*/
+    }
+    /*.pseudobody{*/
+    /*  z-index: 2;*/
+    /*}*/
+    
+    
+    body{
+      color: #eeeeee;
+    }
     a{
       text-decoration: none;
       /*color: inherit;*/
@@ -61,11 +81,20 @@
     h1,h2,h3,h4,h5,h6{
       word-break: keep-all;
     }
+    
+    
+    .echarts {
+      /*width: 300px!important;*/
+      /*height: 200px!important;*/
+      width: min(80vw, 400px)!important;
+      height: min(80vw, 400px)!important;
+    }
 
   </style>
   
 </head>
 <body>
+<!--<div class="pseudobody">-->
   
   <div id="app">
     <v-app id="">
@@ -85,8 +114,8 @@
 
 
 <!-- TABS -->
-    <v-tabs v-model="tab" grow icons-and-text>
-      <v-tab href="#tab1"> game
+    <v-tabs v-model="tab" grow icons-and-text touchless>
+      <v-tab href="#tab1"> Game
         <v-icon>mdi-format-list-checks</v-icon>
       </v-tab>
       <v-tab href="#tab2"> Track
@@ -249,7 +278,7 @@
 
               <v-col cols="12" align="center">
                 <v-file-input label="Upload Game" prepend-icon="mdi-upload" single-line clearable="false"
-                @change="uploadGame($event)" ref="uploadInput"
+                @change="uploadGame($event)" ref="uploadInputRef" v-model="file"
                 class="py-0" outlined dense style="max-width:200px" ></v-file-input>
               </v-col>
             </v-row>
@@ -287,7 +316,7 @@
                         <v-text-field v-model="game.players.M" type="number" label="Men - M"></v-text-field>
                       </v-col>
                       <v-col cols="6" sm="6" class="">
-                        <v-text-field v-model="game.players.M" type="number" label="Women - F"></v-text-field>
+                        <v-text-field v-model="game.players.F" type="number" label="Women - F"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" class="">
                         <v-text-field v-model="game.date" type="date" label="Date"></v-text-field>
@@ -373,32 +402,40 @@
 
           <v-card-text v-if="selectedGame!=undefined">
             
+            <div class="text-center py-2">
+              Selected Game: "{{games[selectedGame].name}}"
+            </div>
+            
             <h4 class="overline">Point {{ points.length+1 }}</h4>
 
-            <v-slider v-model="currentlyAlignedF" min="0" :max="games[selectedGame].type.split('vs')[0]" 
-            label="aligned"
-            prepend-icon="mdi-gender-female"
+            <v-slider v-model="currentlyAlignedF" min="-1" :max="Math.min( games[selectedGame].type.split('vs')[0], games[selectedGame].players.F)" 
+            :label="useMF ? 'F aligned' : 'aligned'"
+            :prepend-icon="useMF ? '' : 'mdi-gender-female'"
             >
-            <template v-slot:append>
-              <v-text-field
-              v-model="currentlyAlignedF"
-              min="0" :max="games[selectedGame].type.split('vs')[0]"
-              class="mt-0 pt-0"
-              hide-details
-              single-line
-              type="number"
-
-              style="width: 30px"
-              ></v-text-field>
-            </template>
+              <template v-slot:append>
+                <v-text-field
+                v-model="currentlyAlignedF"
+                min="0" :max="Math.min( games[selectedGame].type.split('vs')[0], games[selectedGame].players.F)"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+  
+                style="width: 30px"
+                ></v-text-field>
+              </template>
             </v-slider>
 
-            <v-row class="align-center py-2" v-for="gender in ['F','M']" :key="gender" no-gutters>
+            <v-row class="align-center py-2" v-for="gender in ['F','M']" :key="gender" no-gutters v-show="currentlyAlignedF!=null && currentlyAlignedF>=0">
 
               <v-col cols="1" class="font-weight-bold">
                 <!-- {{gender}} -->
-                <v-icon small :class="{'blue--text': lastEvent.split('-')[0] == gender}" v-if="gender=='M'">mdi-gender-male</v-icon>
-                <v-icon small :class="{'blue--text': lastEvent.split('-')[0] == gender}" v-else-if="gender=='F'">mdi-gender-female</v-icon>
+                <span v-if="useMF">{{gender}}</span>
+                <template v-else>
+                  
+                  <v-icon small :class="{'blue--text': lastEvent.split('-')[0] == gender}" v-if="gender=='M'">mdi-gender-male</v-icon>
+                  <v-icon small :class="{'blue--text': lastEvent.split('-')[0] == gender}" v-else-if="gender=='F'">mdi-gender-female</v-icon>
+                </template>
               </v-col>
 
               
@@ -512,11 +549,14 @@
                 </v-col>
               </v-row>
 
-              <v-btn class="mt-5 " block  @click="point.pop()">
+
+            </template>
+            
+            <template v-if="point.length>0 || points.length>0">
+              <v-btn class="mt-5 " block  @click="undoLast()">
                 <v-icon small left color="red">mdi-eraser</v-icon>
                 Undo Last
               </v-btn>
-
             </template>
 
 
@@ -576,7 +616,7 @@
           <v-card-text v-else class="text-cente mt-5 px-5 mx-5">
             <p>
                    No game selected.
-              <br> Select a Game in the 1st tab.
+              <br> Select a Game in the GAME tab.
             </p>
           </v-card-text>
         </v-card>
@@ -587,6 +627,10 @@
       <v-tab-item value="tab3" eager :transition="false" :reverse-transition="false">
         <v-card flat>
           <v-card-text v-if="selectedGame!=undefined && games[selectedGame].score">
+            
+            <div class="text-center py-2">
+              Selected Game: "{{games[selectedGame].name}}"
+            </div>
             
             <div align="center">
               <v-btn-toggle v-model="stat_type" class="text-center">
@@ -604,8 +648,14 @@
                 <thead>
                   <tr>
                     <th class="text-left"></th>
-                    <th class="text-right"><v-icon small>mdi-gender-male</v-icon></th>
-                    <th class="text-right"><v-icon small>mdi-gender-female</v-icon></th>
+                    <th class="text-right">
+                      <span v-if="useMF">M</span>
+                      <v-icon v-else small>mdi-gender-male</v-icon>
+                    </th>
+                    <th class="text-right">
+                      <span v-if="useMF">F</span>
+                      <v-icon v-else small>mdi-gender-female</v-icon>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -634,14 +684,23 @@
                 <thead>
                   <tr>
                     <th class="text-left">From<v-icon x-small>mdi-arrow-down</v-icon> <v-icon small class="mdi-flip-h">mdi-slash-forward</v-icon> To<v-icon x-small>mdi-arrow-right</v-icon></th>
-                    <th class="text-left"><v-icon small>mdi-gender-female</v-icon></th>
-                    <th class="text-left"><v-icon small>mdi-gender-male</v-icon></th>
+                    <th class="text-left">
+                      <span v-if="useMF">F</span>
+                      <v-icon v-else small>mdi-gender-female</v-icon>
+                    </th>
+                    <th class="text-left">
+                      <span v-if="useMF">M</span>
+                      <v-icon v-else small>mdi-gender-male</v-icon>
+                    </th>
                     <th class="text-left o-7"><v-icon small>mdi-sigma</v-icon></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th><v-icon small>mdi-gender-female</v-icon></th>
+                    <th>
+                      <span v-if="useMF">F</span>
+                      <v-icon v-else small>mdi-gender-female</v-icon>
+                    </th>
                     <td
                     :class="[{'font-weight-bold orange--text': stats.passes.ff>20 && stat_type=='Parity/Game'}
                             ,{'font-weight-bold orange--text': stats.passes.ff>25 && stat_type=='Percentage'}]">{{stats.passes.ff | round0 }} <small v-if="stat_type!='Count'">%</small></td>
@@ -651,7 +710,10 @@
                     <td class="o-7">{{ +stats.passes.ff + +stats.passes.fm | round0 }} <small v-if="stat_type!='Count'">%</small></td>
                   </tr>
                   <tr>
-                    <th><v-icon small>mdi-gender-male</v-icon></th>
+                    <th>
+                      <span v-if="useMF">M</span>
+                      <v-icon v-else small>mdi-gender-male</v-icon>
+                    </th>
                     <td
                     :class="[{'font-weight-bold orange--text': stats.passes.mf>20 && stat_type=='Parity/Game'}
                             ,{'font-weight-bold orange--text': stats.passes.mf>25 && stat_type=='Percentage'}]">{{stats.passes.mf | round0 }} <small v-if="stat_type!='Count'">%</small></td>
@@ -673,7 +735,7 @@
 
 
             <div class="d-flex justify-center">
-              <v-chart-pie :data="piedata"></v-chart-pie>
+              <v-chart-pie :data="piedata" class="mkipoqjxnqt"></v-chart-pie>
             </div>
             
             
@@ -692,7 +754,7 @@
           <v-card-text v-else class="text-cente mt-5 px-5 mx-5">
             <p>
                    No game selected.
-              <br> Select a Game in the 1st tab.
+              <br> Select a Game in the GAME tab.
             </p>
           </v-card-text>
         </v-card>
@@ -705,15 +767,19 @@
           <v-card-text v-if="selectedGame!=undefined && games[selectedGame].score"
             align="center" class="mt-5"
            >
-                <v-btn class="ma-2" dark @click="downloadGame()">
-                  <v-icon left>mdi-download</v-icon> Download Game
-                </v-btn>
+            <div class="text-center py-2">
+              Selected Game: "{{games[selectedGame].name}}"
+            </div>
+            
+            <v-btn class="ma-2" dark @click="downloadGame()">
+              <v-icon left>mdi-download</v-icon> Download Game
+            </v-btn>
 
-                <p>
-                  This will download a json file.
-                  <br>
-                  Which you can save, share and reupload to analyse later.
-                </p>
+            <p>
+              This will download a json file.
+              <br>
+              Which you can save, share and reupload to analyse later.
+            </p>
           </v-card-text>
           <v-card-text v-else-if="selectedGame!=undefined" class="text-cente px-5 mx-5">
             <p>
@@ -725,7 +791,7 @@
           <v-card-text v-else class="text-cente px-5 mx-5">
             <p>
                    No game selected.
-              <br> Select a Game in the 1st tab.
+              <br> Select a Game in the GAME tab.
             </p>
           </v-card-text>
         </v-card>
@@ -743,7 +809,7 @@
       <v-col cols="612" sm="10">
         <h4 class="overline">Options</h4>
         <v-switch v-model="$root.goDark" label="Dark Mode" ></v-switch>
-        <!--<v-switch v-model="$root.useMF" label="M-F" ></v-switch>-->
+        <v-switch v-model="$root.useMF" label="use M/F instead of symbols" ></v-switch>
       </v-col>
       <v-col cols="12" class="text-center my-5 py-5 o-6 black--text">
           &copy; 2020 
@@ -764,6 +830,15 @@
 
 </v-col> </v-row> </v-container>
 
+    <v-snackbar
+      v-model="snackbar1"
+      :timeout="3000"
+      color="succes"
+      top
+    >
+      File uploaded correctly
+      <v-icon class="success--text">mdi-check</v-icon>
+    </v-snackbar>
 
       </v-content>
     </v-app>
@@ -798,81 +873,6 @@
   <script type="text/javascript">
     // Vue.use(VueVega.default)
     
-    Vue.component('v-chart-pie', {
-      props: ['data', 'title'],
-      components: {
-        'v-chart': VueECharts,
-      },
-      data:() => ({
-        // echartdef_LINE: {
-        //   xAxis: { data: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ] },
-        //   yAxis: { type: 'value' },
-        //   series: [ { type: 'line',
-        //       data: [55, 72, 84, 48, 59, 62, 87, 75, 94, 101, 127, 118]
-        //   }],
-        //   title: { text: 'Monthly Stock Prices', x: 'center', },
-        //   color: ['#127ac2']
-        // },
-        echartdef_PIE: {
-          title: {
-            text: this.title,
-            x: 'center'
-          },
-          tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
-          },
-          // legend: {
-          //   orient: 'vertical',
-          //   left: 'left',
-          //   data: ['F>F', 'M>M', 'F>M', 'M>F']
-          // },
-          series: [
-            {
-              name: 'aaaa',
-              type: 'pie',
-              radius: ['30%', '60%'],
-              // center: ['50%', '60%'],
-              data: [
-                { value: 546, name: 'F>F' },
-                { value: 310, name: 'M>M' },
-                { value: 234, name: 'F>M' },
-                { value: 135, name: 'M>F' },
-                // { value: 1548, name: 'ee' }
-              ],
-              itemStyle: {
-                emphasis: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
-            }
-          ]
-        },
-      }),
-      watch: {
-        data: function(val, oldval){
-          this.echartdef_PIE.title.text = val;
-        },
-        data: function(ddd, oldval){
-          this.echartdef_PIE.series[0].data = [];
-          Object.keys(ddd).map((label, ii)=> {
-            this.echartdef_PIE.series[0].data.push({'name':label, 'value':ddd[label]});
-          })
-        },
-      }, // /watch: {
-      template: `<div >
-          <v-chart 
-          :options="echartdef_PIE" 
-          autoresize
-          theme="ovilia-green"
-          ></v-chart>
-      </div>`,
-              // style="width:100%"
-              // theme="ovilia-green"
-              // theme="polarTheme"
-    });
     
     var app = new Vue({
       el: '#app',
@@ -906,7 +906,9 @@
 
         tab: 'tab1',
         selectedGame: null,
-
+        file: null,
+        snackbar1: false,
+        useMF: false,
         games: [
           // { name: 'Test empty - Robocop vs. Mickey',
           //   date: new Date().toISOString().slice(0, 10),
@@ -915,8 +917,8 @@
           // },
           { name: 'Test Recorded - Tom vs. jerry',
             date: new Date().toISOString().slice(0, 10),
-            type: '5vs5',
             players: {'M':5,'F':8},
+            type: '5vs5',
             // players: {'M':['John','Brad','Tim'],'F':['Anne','Sophie']},
             points: [
               ["F-pullthrow", "O-throwaway", "O-goal"],
@@ -952,7 +954,7 @@
         points:[],
         point:[],
         totalAlignedF:[],
-        currentlyAlignedF:3,
+        currentlyAlignedF:null,
 
         stat_type: 'Count',
         
@@ -977,7 +979,7 @@
           else if(this.points.length>0)
             ev = this.points.slice().pop().slice().pop()//.replace('F-','').replace('M-','')//.split('-')[1];
           else ev='';
-          console.log('ev',ev)
+          // console.log('ev',ev)
           return ev;
         },
         stats(){
@@ -1190,8 +1192,16 @@
             nplf = 0
           }
           
+          // ROUNDING PRECISION
+          pff = Math.round(pff *100)/100;
+          pfm = Math.round(pfm *100)/100;
+          pmf = Math.round(pmf *100)/100;
+          pmm = Math.round(pmm *100)/100;
+          
+          
           // UPDATE PIE CHART 
-          if(this.stat_type!='Parity/Game'){
+          // if(this.stat_type!='Parity/Game'){
+          if(this.stat_type=='Count'){
             app.$data.piedata = {'F>F':pff,'F>M':pfm,'M>F':pmf,'M>M':pmm};
           }
 
@@ -1233,14 +1243,23 @@
       methods: {
         createGame(){
           console.log('createGame()')
-          this.game.points = [];
-          this.games.push(this.game);
+          // this.game.points = [];
+          // this.games.push(this.game); // this is a deep copy, bug
+          this.games.push({
+            name: this.game.name,
+            date: this.game.date,
+            players: this.game.players,
+            type: this.game.type,
+            points: null,
+            alignedF: null,
+            score: null,
+          });
           this.selectedGame = this.games.length -1;
-          // this.games[this.game.name] = this.game.copy();
         },
         uploadGame(file){
           // file=ev.target.files[0];
           console.log('uploadGame()')
+          let that=this;
 
           const reader = new FileReader();
           reader.onload = e => { 
@@ -1250,10 +1269,34 @@
             this.selectedGame = this.games.length -1;
           };
           reader.readAsText(file);
+          
+          // empty input
+          // console.log(this.$refs.uploadInputRef)
+          setTimeout(function() {
+            that.file = null;
+          }, 10);
+          
+          // confirm snackbar
+          that.snackbar1 = true;
+          
+          // reset app
+          this.stat_type='Count';
+          
         },
         editGame(index){
           console.log('editGame()')
-          this.game = this.games[index];
+          // console.log(this.games[index])
+          thisgame = this.games[index];
+          this.game = {
+            name: thisgame.name,
+            date: thisgame.date,
+            players: thisgame.players,
+            type: thisgame.type,
+            points: thisgame.points,
+            alignedF: thisgame.alignedF,
+            score: thisgame.score,
+          };
+          
           this.modalCreateGame = true;
         },
         deleteGame(index){
@@ -1265,12 +1308,18 @@
             ) 
             this.selectedGame = this.games.length -1;
         },
+        undoLast(){
+          if(this.point.length==0) this.point = this.points.pop();
+          this.point.pop();
+        },
         endPoint(){
-          console.log('endPoint()')
+          console.log('endPoint()');
 
           this.totalAlignedF.push(this.currentlyAlignedF);
           this.points.push(this.point);
           this.point = [];
+          
+          this.currentlyAlignedF=-1;
         },
         endGame(){
           console.log('endGame()')
@@ -1315,7 +1364,122 @@
         // },
         
       }, // /filters: {
-    });
+    }); // /var app
+    
+    
+    
+// COMPONENTS
+
+Vue.component('v-chart-pie', {
+  props: ['data', 'title', 'type'],
+  components: {
+    'v-chart': VueECharts,
+  },
+  data:() => ({
+    // echartdef_LINE: {
+    //   xAxis: { data: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ] },
+    //   yAxis: { type: 'value' },
+    //   series: [ { type: 'line',
+    //       data: [55, 72, 84, 48, 59, 62, 87, 75, 94, 101, 127, 118]
+    //   }],
+    //   title: { text: 'Monthly Stock Prices', x: 'center', },
+    //   color: ['#127ac2']
+    // },
+    // echartdef_HBAR: {
+    //   xAxis : [
+    //     { // type : 'value' 
+    //     }
+    //   ],
+    //   yAxis : [
+    //     {
+    //       // type : 'category',
+    //       // axisTick : {show: false},
+    //       data : ['ff','fm','mf','mm']
+    //     }
+    //   ],
+    //   series : [
+    //     {
+    //       // name:'利润',
+    //       type:'bar',
+    //       label: {
+    //         normal: {
+    //           show: true,
+    //           // position: 'inside'
+    //         }
+    //       },
+    //       data:[-6, -11, 0, 17]
+    //     },
+    //   ]
+    // },
+    echartdef_PIE: {
+      title: {
+        text: this.title,
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c} ({d}%)'
+      },
+      // legend: {
+      //   orient: 'vertical',
+      //   left: 'left',
+      //   data: ['F>F', 'M>M', 'F>M', 'M>F']
+      // },
+      series: [
+        {
+          name: 'nonameneeded',
+          type: 'pie',
+          radius: ['40%', '90%'],
+          // center: ['50%', '60%'],
+          data: [
+            { value: 546, name: 'F>F' },
+            { value: 310, name: 'M>M' },
+            { value: 234, name: 'F>M' },
+            { value: 135, name: 'M>F' },
+            // { value: 1548, name: 'ee' }
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'inside'
+              },
+          },
+          avoidLabelOverlap: true,
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+          },
+        }
+      ]
+    },
+  }),
+  watch: {
+    data: function(val, oldval){
+      this.echartdef_PIE.title.text = val;
+    },
+    data: function(ddd, oldval){
+      this.echartdef_PIE.series[0].data = [];
+      Object.keys(ddd).map((label, ii)=> {
+        value = ddd[label];
+        if (value)
+            this.echartdef_PIE.series[0].data.push({'name':label, 'value':ddd[label]});
+      })
+    },
+  }, // /watch: {
+  template: `<div >
+      <v-chart 
+      :options="echartdef_PIE" 
+      autoresize
+      theme="ovilia-green"
+      ></v-chart>
+  </div>`,
+          // style="width:100%"
+          // theme="ovilia-green"
+          // theme="polarTheme"
+});
     
     
     
@@ -1342,14 +1506,124 @@
     gtag('config', 'UA-102498736-2');
   </script>
   
+  <script>
+(function() {
+  // var isChrome = window.chrome || navigator.userAgent.match('CriOS');
+  var isTouch = 'ontouchstart' in document.documentElement;
+
+  // if (!isChrome || !isTouch) {
+  if (!isTouch) {
+    return;
+  }
+  
+  // alert(1)
+
+  var supportsOverscroll = false;
+  var supportsPassive = false;
+  var lastTouchY = 0;
+  var maybePrevent = false;
+
+  // try {
+  //   if (CSS.supports('overscroll-behavior-y', 'contain')) {
+  //     supportsOverscroll = true;
+  //   }
+  // } catch (e) {}
+  // alert('supportsOverscroll '+ supportsOverscroll)
+  // if (supportsOverscroll) {
+  //   return (document.body.style.overscrollBehaviorY = 'contain'); // this return ends the code after
+  // } else {
+  //   var head = document.head || document.body;
+  //   var style = document.createElement('style');
+  //   var css =
+  //     '\n      ::-webkit-scrollbar {\n        width: 5px;\n      }\n      ::-webkit-scrollbar-thumb {\n        border-radius: 5px;\n        background-color: rgba(0, 0, 0, 0.2);\n      }\n      body {\n        -webkit-overflow-scrolling: auto!important;\n      }\n    ';
+  //   style.type = 'text/css';
+  //   if (style.styleSheet) {
+  //     style.styleSheet.cssText = css;
+  //   } else {
+  //     style.appendChild(document.createTextNode(css));
+  //   }
+  //   head.appendChild(style);
+  // }
+  
+  try {
+    window.addEventListener('test', null, {
+      get passive() {
+        supportsPassive = true;
+      },
+    });
+  } catch (e) {}
+  
+  // alert('supportsPassive '+ supportsPassive)
+
+  var setTouchStartPoint = function setTouchStartPoint(event) {
+    lastTouchY = event.touches[0].clientY;
+  };
+  // alert('lastTouchY '+ lastTouchY)
+
+  var isScrollingUp = function isScrollingUp(event) {
+    var touchY = event.touches[0].clientY;
+    var touchYDelta = touchY - lastTouchY;
+    lastTouchY = touchY;
+    return touchYDelta > 0;
+  };
+
+  var touchstartHandler = function touchstartHandler(event) {
+        // alert('touchstartHandler')
+    if (event.touches.length !== 1) return;
+    setTouchStartPoint(event);
+    maybePrevent = window.pageYOffset === 0;
+  };
+
+  var touchmoveHandler = function touchmoveHandler(event) {
+        // alert('touchmoveHandler')
+    if (maybePrevent) {
+      maybePrevent = false;
+
+      if (isScrollingUp(event)) {
+        // alert()
+        return event.preventDefault();
+      }
+    }
+  };
+
+  document.addEventListener(
+    'touchstart',
+    touchstartHandler,
+    supportsPassive
+      ? {
+          passive: true,
+        }
+      : false,
+  );
+  document.addEventListener(
+    'touchmove',
+    touchmoveHandler,
+    supportsPassive
+      ? {
+          passive: false,
+        }
+      : false,
+  );
+})();
+  </script>
+  
+<!--</div>--> <!--.pseudobody-->
 </body>
 </html>
 
 
 <!-- 
 TODO
-- show selected game at the top of page ?
+- BUG: pie chart stays if select % then upload new game and go back to stats. because pie only updates on COUNT.
+
+- forget to encode currentlyAlignedF -> force only see that
+- undo even if point is ended
+- if page reloaded -> loose everything. Save in cache before reload or prevent reload ?
+
+
 - minify -> faster
 - share games in the cloud ? (with password ?) (accounts?)
-- 
+- show multiple game stats
+- 1 global parity index ?
+
  -->

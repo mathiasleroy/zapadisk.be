@@ -1,0 +1,120 @@
+{
+  "name": "Bumic2 - zapa2 vs ?",
+  "date": "2019-12-15",
+  "players": {
+    "M": 4,
+    "F": 4
+  },
+  "type": "5vs5",
+  "points": [
+    [
+      "M-pullpick",
+      "M-catch",
+      "M-catch",
+      "U-throwaway",
+      "O-throwaway",
+      "M-pick",
+      "F-catch",
+      "M-catch",
+      "M-goal"
+    ],
+    [
+      "F-pullthrow",
+      "F-defense",
+      "M-pick",
+      "F-catch",
+      "F-goal"
+    ],
+    [
+      "M-pullthrow",
+      "O-throwaway",
+      "F-pick",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "U-throwaway",
+      "O-throwaway",
+      "M-pick",
+      "F-catch",
+      "M-catch",
+      "M-catch",
+      "U-throwaway",
+      "F-defense",
+      "F-pick",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "M-catch",
+      "U-throwaway",
+      "O-throwaway",
+      "M-pick",
+      "U-throwaway",
+      "O-goal"
+    ],
+    [
+      "F-pullpick",
+      "M-catch",
+      "F-catch",
+      "M-catch",
+      "U-throwaway",
+      "O-throwaway",
+      "F-pick",
+      "M-catch",
+      "M-goal",
+      "U-pick",
+      "U-goal",
+    ],
+    [
+      "M-pullthrow",
+      "O-throwaway",
+      "M-pick",
+      "U-throwaway",
+      "O-throwaway",
+
+    ],
+    [
+      "F-pullthrow",
+      "O-goal"
+    ],
+    [
+      "F-pullpick",
+      "F-catch",
+      "M-catch",
+      "F-catch",
+      "U-throwaway",
+      "O-goal"
+    ],
+    [
+      "F-pullpick",
+      "U-throwaway",
+      "M-defense",
+      "F-pick",
+      "M-catch",
+      "F-drop",
+      "O-throwaway",
+      "F-pick",
+      "M-drop",
+      "O-throwaway",
+      "F-pick",
+      "U-throwaway",
+      "F-defense",
+      "M-pick",
+      "U-throwaway",
+      "O-goal"
+    ]
+  ],
+  "score": "4 — 4",
+  "savedate": "2019-12-15",
+  "alignedF": [
+    3,
+    3,
+    3,
+    2,
+    3,
+    2,
+    3,
+    3,
+    3
+  ],
+  "comments":"manque les 3 premiers points"
+}
