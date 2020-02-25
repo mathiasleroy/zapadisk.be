@@ -36,7 +36,7 @@ cf. [Jekyll documentation](https://jekyllrb.com/)
 
     git add .; git commit -m "whatyouchanged"; git push;
     
-    first time:  git push -u origin master
+    (first time:  git push -u origin master)
 
 
 Gender-Stats is deployed as a standalone app on https://zapagender.surge.sh for the pwa installation to work.
