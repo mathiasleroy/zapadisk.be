@@ -13,6 +13,11 @@ The website is in the folder `/docs`.
 This folder is generated with [Jekyll](https://jekyllrb.com/).  
 
 
+DEPENDENCIES
+--------------
+
+    npm i -g surge
+
 
 HOW TO MAKE CHANGES / MODIFY PAGES
 --------------
