@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Learn Ultimate Rules</title>
+  <meta name="description" content="">
+  <meta name="author" content="Mathias Leroy"> 
+  
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  
+  <!-- CSS -->
+  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">-->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  
+  <!--<link href="manifest.json" rel="manifest">-->
+  
+  <style type="text/css">
+    html{
+      /*font-size: calc(10px + 1vw);*/
+      /*font-size: calc(10px);*/
+    }
+    .fs08{font-size:0.8em}
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app id="">
+      <v-main>
+        <v-container class="fill-height d-flex flex-column justify-space-aroun" fluid >
+          <!--<v-spacer></v-spacer>-->
+          
+          <v-card align="center" class="mx-auto" max-width="600" flat >
+            <!--<v-card-title> QUESTION {{currentID}} </v-card-title>-->
+            
+            <!--TITLE-->
+            <v-list-item three-line>
+              <v-list-item-content>
+                <!--<div class="overline mb-4">QUESTION {{currentID+1}}</div>-->
+                <v-list-item-title class="headline mb-1">QUESTION {{currentID+1}}</v-list-item-title>
+                <!--<v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>-->
+              </v-list-item-content>
+            </v-list-item>
+            
+            <!--QUESTION-->
+            <v-card-text class="body-1">
+              <p>{{questions[currentID].Question}}</p>
+            </v-card-text>
+            
+            <!--ANSWER-->
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" v-if="replied">True</v-btn>
+              <v-btn text color="primary" @click="reply(true)" v-else>True</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" v-if="replied">False</v-btn>
+              <v-btn text color="primary" @click="reply(false)" v-else>False</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+            
+            <!--VALIDATION-->
+            <v-card-actions v-if="replied">
+              <v-spacer></v-spacer>
+              <v-icon large v-show="currentReply==true" color="green" v-if="questions[currentID].Answer==currentReply">mdi-check-circle</v-icon>
+              <v-icon large v-show="currentReply==true" color="red" v-else>mdi-close-circle</v-icon>
+              <v-spacer></v-spacer>
+              <v-icon large v-show="currentReply==false" color="green" v-if="questions[currentID].Answer==currentReply">mdi-check-circle</v-icon>
+              <v-icon large v-show="currentReply==false" color="red" v-else>mdi-close-circle</v-icon>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+            
+            <!--RULE-->
+            <v-card-text class="body-1" v-if="replied">
+              <p v-if="currentRuleId" v-for="rrid in currentRuleId.split(', ')" >
+                <span v-if="rrid && rrid=='Definitions'">
+                  <a target="_blank" href="https://rules.wfdf.org/definitions">https://rules.wfdf.org/definitions</a>
+                </span>
+                <span v-else>
+                  <span class="font-weight-bold">{{rrid}}</span>
+                  <br>
+                  {{rules[rrid]}}
+                </span>
+              </p>
+            </v-card-text>
+            
+            <!--NEXT-->
+            <v-card-actions v-if="replied">
+              <!--<v-spacer></v-spacer>-->
+              <v-spacer></v-spacer>
+              <v-btn class="mx-1 primary" @click="nextQuestion()">Next</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+          
+          <v-spacer></v-spacer>
+          
+          <!--FOOTER-->
+          <div align="center" justify="center" v-if="history.length>1 || replied">
+            {{countRight+countWrong}} Replies
+            - {{percCorrect*100}}% Correct
+          </div>
+          <!--<div align="center" justify="center"  class="fs08" v-if="history.length>1 || replied">-->
+          <!--  (aim for >50 Replies and >85% Correct)-->
+          <!--</div>-->
+          <div align="center" justify="center"  class="fs08 mb-2">
+            <a target="_blank" href="https://rules.wfdf.org/">WFDF Rules</a>
+            - <a href="https://www.ffdf.fr/wp-content/uploads/2017/05/wfdf_ultimate_rules_2017_-_french.pdf">Règles FR</a>  
+            - <a href="https://zapadisk.be/">Zapadisk.be</a>  
+            <!--{{history}}-->
+          </div>
+          
+          <!--<v-row align="center" justify="center" >-->
+          <!--</v-row>-->
+        </v-container>
+      </v-main>
+    </v-app>
+  
+  
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="rules.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  
+  <script>
+
+var app = new Vue({
+  el: '#app',
+  vuetify: new Vuetify(),
+  // ------------------------------------------------------- COMPONENTS
+  components: {
+    // 'mynavbar': httpVueLoader('components/navbar.vue'),  },
+  },
+  
+
+  // ------------------------------------------------------- DATA
+  data: () => ({
+    questions: data_questions,
+    rules: data_rules,
+    history:[],
+    results:[],
+    difficulties:[],
+    currentID:0,
+    replied:false,
+    currentReply:null,
+    countRight:0,
+    countWrong:0,
+    score:0,
+    /*  the aim of the score is to have competitivity
+        michael argues that you want them to answer more and more questions,
+        not especially right, just do as much
+        --> 1/( 1+e^(-0.2*(x-75)) )
+    */
+    
+  }), // /data: () => ({
+  
+  
+  // ------------------------------------------------------- METHODS
+  methods: {
+    selectRandom(){
+      do {
+        rr = Math.floor( this.questions.length * Math.random() );
+      }
+      while (this.history.indexOf(rr)>-1);
+      this.history.push(rr);
+      this.currentID = rr;
+      // this.currentID = 29; // multiple rules
+      // this.currentID = 108; // rule = Definitions
+      // this.currentID = 159; // no rule
+      // this.currentID = 179; // rule need expand
+      // this.currentID = 51; // rule need expand actually only 13.2.2 would be needed
+      // this.currentID = 102; // 13.2.7, manque règle d'avant
+      // this.currentID = 105; // manque sous points
+      // this.currentID = 42; // manque sous points de 9.3.1
+      // this.currentID = 178; // manque sous points 11.7
+      // this.currentID = 54; // manque sous points 13.5
+      // this.currentID = 4; // manque sous points 15.9
+      // this.currentID = 134; // arnaud pas d'accord
+      // this.currentID = 58; // arnaud pas d'accord
+      // this.currentID = 168; // mick pas d'accord -> deflection = rebondir sur un autre
+    },
+    nextQuestion(){
+      this.replied=false;
+      this.selectRandom();
+    },
+    reply(answer){
+      this.currentReply=answer;
+      this.replied=true;
+      ///
+      isRight = this.questions[this.currentID].Answer == answer;
+      ddiff = this.questions[this.currentID].Difficulty;
+      // ddiff = 1+ (ddiff-0.04) * 4/0.68; // 1-5
+      
+      /// counts
+      if(isRight) this.countRight++;
+      else this.countWrong++;
+      this.results.push(isRight);
+      
+      //// score
+      if(isRight) this.score += ddiff*100;
+      else this.score += ddiff*100-70;
+      this.score = Math.round(this.score*10)/10;
+      // this.score += (2*isRight-1) * ddiff*100;
+      // this.score = (this.countRight + this.countWrong);
+      // 1/(1+e^(-0.2*(x-75)) )
+      // https://www.wolframalpha.com/input/?i=plot+1%2F%281%2Be%5E%28-0.2*%28x-75%29%29+%29+with+%28x+from+50+to+100%29
+      /// print
+      console.log(this.currentID, answer, isRight, ddiff, this.score)
+    },
+  }, // /methods: {
+  
+  
+  // ------------------------------------------------------- COMPUTED
+  computed: {
+    percCorrect: function () {
+      return Math.round(100*this.countRight/(this.countRight+this.countWrong))/100;
+    },
+    currentRuleId:function(){
+      rrid = this.questions[this.currentID].Rule.replace('(','').replace(')','');
+      rule = this.rules[rrid.split(', ')[0]];
+      newrrid = rrid;
+      // if the rule ends with :, expand
+      if(rrid && rule.slice(-1)==':'){
+        for(i=1;i<9;i++){
+          if(this.rules[rrid+ '.'+i]){ // check if what we add exists
+            newrrid += ', ' + rrid+ '.'+i;
+          }
+        }
+      }
+      // if the rule begins with lowercase, add parent
+      if(rrid && rule.slice(0,1)==rule.slice(0,1).toLowerCase()){
+        newrrid = rrid.slice(0, -2) +', '+ newrrid;
+      }
+      
+      // complicated exceptions
+      if(this.questions[this.currentID].Rule=='(17.2.2, 9.3.1)')
+        newrrid = '17.2.2, 9.3, 9.3.1';
+        
+      return newrrid;
+    },
+  }, // /computed: {
+  
+  
+  // ------------------------------------------------------- MOUNTED
+  mounted () {
+    this.selectRandom();
+    // var that=this;
+    // (...do something)
+  }, // /mounted () {
+  
+  
+  // ------------------------------------------------------- WATCH
+  watch: {
+    // currentRuleId: function(val, oldval){ // console.log('val',val);
+    // },
+  }, // /watch: {
+  
+})
+
+  </script>
+</body>
+</html>
