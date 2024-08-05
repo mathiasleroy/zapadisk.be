@@ -16,7 +16,10 @@ This folder is generated with [Jekyll](https://jekyllrb.com/).
 DEPENDENCIES
 --------------
 
-    npm i -g surge
+- [RubyGems](https://rubyinstaller.org/)
+- [jekyll](https://jekyllrb.com/)
+- [nodejs](https://nodejs.org/en)
+- [surge](https://surge.sh/)
 
 
 HOW TO MAKE CHANGES / MODIFY PAGES
