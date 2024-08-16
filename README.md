@@ -17,9 +17,9 @@ DEPENDENCIES
 --------------
 
 - [RubyGems](https://rubyinstaller.org/)
-- [jekyll](https://jekyllrb.com/)
+- [jekyll](https://jekyllrb.com/) (`gem install jekyll` and `gem install jekyll-minifier`)
 - [nodejs](https://nodejs.org/en)
-- [surge](https://surge.sh/)
+- [surge](https://surge.sh/) (`npm install --global surge`)
 
 
 HOW TO MAKE CHANGES / MODIFY PAGES
@@ -27,29 +27,31 @@ HOW TO MAKE CHANGES / MODIFY PAGES
 
 1. get the most recent version of the git repo:  
 
-    git pull origin master;
+    `git pull origin master`
 	
 2. make changes in root folder (not /docs)  
 cf. [Jekyll documentation](https://jekyllrb.com/)  
 
 3. build -> compiles into 'docs' folder
 
-    jekyll build;
+    `jekyll build`
+
+    (to run locally: `cd docs; jekyll serve` and open localhost::4000)
     
 4. deploy:	
 
-    cd docs; surge; cd ..;
+    `cd docs; surge; cd ..;`
 	
-5. share changes: 
+5. push changes: 
 
-    git add .; git commit -m "whatyouchanged"; git push;
+    `git add .; git commit -m "whatyouchanged"; git push;`
     
-    (first time:  git push -u origin master)
+    (first time:  `git push -u origin master`)
 
 
 Gender-Stats is deployed as a standalone app on https://zapagender.surge.sh for the pwa installation to work.
 
-  cd gender-stats; surge; cd ..;
+  `cd gender-stats; surge; cd ..;`
 
 
 RESOURCES

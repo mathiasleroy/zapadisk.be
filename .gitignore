@@ -2,3 +2,4 @@
 .jekyll-cache/
 .jekyll-metadata
 score-calculator.html
+node_modules/
